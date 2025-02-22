@@ -2,6 +2,7 @@ package com.bridgelabz.greeting_app.controller;
 
 import com.bridgelabz.greeting_app.dto.Greeting;
 import org.springframework.web.bind.annotation.*;
+import com.bridgelabz.greeting_app.service.GreetingService;
 
 @RestController
 @RequestMapping("/greeting")
@@ -25,5 +26,16 @@ public class GreetingController {
     @DeleteMapping
     public Greeting deleteGreeting(){
         return new Greeting("Hello from DELETE method!");
+    }
+
+    public final GreetingService greetingService;
+
+    // Constructor-based dependency injection
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+    @GetMapping("/2")
+    public Greeting getGreetingService() {
+        return new Greeting(greetingService.getGreetingMessage());
     }
 }

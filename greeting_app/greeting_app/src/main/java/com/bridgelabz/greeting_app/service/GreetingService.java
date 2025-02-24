@@ -45,4 +45,11 @@ public class GreetingService {
     public Optional<GreetingEntity> getGreetingById(Long id) {
         return greetingRepository.findById(id);
     }
+
+    //UC-5
+
+    public GreetingEntity findGreetingById(Long id) {
+        Optional<GreetingEntity> greeting = greetingRepository.findById(id);
+        return greeting.orElse(null); // Returns null if not found (or throw exception)
+    }
 }

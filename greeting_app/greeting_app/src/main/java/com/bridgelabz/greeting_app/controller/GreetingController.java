@@ -69,4 +69,5 @@ public class GreetingController {
     public Optional<GreetingEntity> getGreetingById(@PathVariable Long id) {
         return greetingService.getGreetingById(id);
     }
+
 }

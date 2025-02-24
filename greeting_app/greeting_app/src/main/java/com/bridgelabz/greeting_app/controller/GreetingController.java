@@ -5,6 +5,7 @@ import com.bridgelabz.greeting_app.model.GreetingEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.greeting_app.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,5 +79,12 @@ public class GreetingController {
     @PutMapping("/update/{id}")
     public GreetingEntity updateGreeting(@PathVariable(value="id") Long id, @RequestParam String message) {
         return greetingService.updateGreeting(id, message);
+    }
+
+    //UC-8
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable("id") Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.ok("Greeting message with ID " + id + " deleted successfully!");
     }
 }

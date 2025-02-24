@@ -61,4 +61,17 @@ public class GreetingService {
             return greetingRepository.save(greeting);
         }).orElseThrow(() -> new RuntimeException("Greeting with ID " + id + " not found"));
     }
+
+    //UC-8
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
+    public void deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Greeting with ID " + id + " not found");
+        }
+    }
 }

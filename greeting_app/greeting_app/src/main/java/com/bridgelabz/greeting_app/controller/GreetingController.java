@@ -4,6 +4,7 @@ import com.bridgelabz.greeting_app.dto.Greeting;
 import com.bridgelabz.greeting_app.model.GreetingEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bridgelabz.greeting_app.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,4 +71,12 @@ public class GreetingController {
         return greetingService.getGreetingById(id);
     }
 
+    //UC-7
+    @Autowired
+
+    // API to update a greeting message by ID
+    @PutMapping("/update/{id}")
+    public GreetingEntity updateGreeting(@PathVariable(value="id") Long id, @RequestParam String message) {
+        return greetingService.updateGreeting(id, message);
+    }
 }

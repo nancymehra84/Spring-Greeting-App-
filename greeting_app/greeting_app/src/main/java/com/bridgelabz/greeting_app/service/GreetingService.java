@@ -52,4 +52,13 @@ public class GreetingService {
         Optional<GreetingEntity> greeting = greetingRepository.findById(id);
         return greeting.orElse(null); // Returns null if not found (or throw exception)
     }
+
+    //UC-7
+    // Method to update a greeting message by ID
+    public GreetingEntity updateGreeting(Long id, String newMessage) {
+        return greetingRepository.findById(id).map(greeting -> {
+            greeting.setMessage(newMessage);
+            return greetingRepository.save(greeting);
+        }).orElseThrow(() -> new RuntimeException("Greeting with ID " + id + " not found"));
+    }
 }

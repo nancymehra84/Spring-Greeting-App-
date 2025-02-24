@@ -1,6 +1,13 @@
 package com.bridgelabz.greeting_app.service;
 
+import com.bridgelabz.greeting_app.model.GreetingEntity;
+import com.bridgelabz.greeting_app.repository.GreetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GreetingService {
     public String getGreetingMessage() {
@@ -17,5 +24,25 @@ public class GreetingService {
         } else {
             return "Hello World!";
         }
+    }
+    @Autowired
+    private GreetingRepository greetingRepository;
+
+
+
+    // Save greeting to the database
+    public GreetingEntity saveGreeting(String message) {
+        GreetingEntity greeting = new GreetingEntity(message);
+        return greetingRepository.save(greeting);
+    }
+
+    // Get all greetings
+    public List<GreetingEntity> getAllGreetings() {
+        return greetingRepository.findAll();
+    }
+
+    // Get greeting by ID
+    public Optional<GreetingEntity> getGreetingById(Long id) {
+        return greetingRepository.findById(id);
     }
 }
